@@ -1,0 +1,16 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+}
+
+.dialogs__item {
+    padding-bottom: 5px;
+}
+
+.dialogs__item_active {
+    color:yellowgreen;
+}
+
+.message__item {
+    padding-bottom: 5px;
+}

@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas:
+  "head head head"
+  "side main main";
+}
+
+.main-content {
+  grid-area: main;
+  background-color: rgba(192, 109, 132, 0.5);
+}

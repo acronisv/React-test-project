@@ -1,0 +1,8 @@
+.side_bar {
+  grid-area: side;
+  background-color: rgba(242, 115, 127, 0.5);
+}
+
+a.active {
+  color: white
+}
