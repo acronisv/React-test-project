@@ -1,4 +1,6 @@
-import Posts from "../components/Posts/Posts";
+let renderEntireTree = () => {
+    console.log('state changed')
+}
 
 let state = {
     dialogsPage: {
@@ -20,7 +22,8 @@ let state = {
             { id: 1, title: 'Компонент', text: 'Функция возвращающая разметку JSX с параметрами props', likesCount: 12 },
             { id: 2, title: 'title2', text: 'text2', likesCount: 7 },
             { id: 3, title: 'title3', text: 'text3', likesCount: 5 }
-        ]
+        ],
+        newPostText: 'default text'
     },
     sideBar: {
         mainMenu: [
@@ -38,14 +41,26 @@ let state = {
     }
 }
 
-export let addPost = (postMessage) => {
+window.state = state
+export let addPost = () => {
     let newPost = {
         id: 5,
         title: 'New title',
-        text: postMessage,
+        text: state.postsPage.newPostText,
         likesCount: 5
     }
     state.postsPage.postsData.push(newPost)
+    state.postsPage.newPostText = ''
+    renderEntireTree(state)
+}
+
+export let updateNewPostText = (newText) => {
+    state.postsPage.newPostText = newText
+    renderEntireTree(state)
+}
+
+export const subscribe = (observer) => {
+    renderEntireTree = observer
 }
 
 export default state;

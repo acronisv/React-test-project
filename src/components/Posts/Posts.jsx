@@ -6,15 +6,21 @@ const Posts = (props) => {
   let newPostElement = React.createRef()
 
   let newPost = () => {
-    let text = newPostElement.current.value
-    props.addPost(text)
+    //let text = newPostElement.current.value
+    props.addPost()
   }
 
-  let postsElements = props.state.postsData.map(post => <Post title = {post.title} text = {post.text} likes = {post.likesCount}/>)
+  let onPostChange =() => {
+    let text = newPostElement.current.value
+    props.updateNewPostText(text)
+    console.log(props.postsPage)
+  }
+
+  let postsElements = props.postsPage.postsData.map(post => <Post title = {post.title} text = {post.text} likes = {post.likesCount}/>)
   return (
     <div>
       <h3>Posts</h3>
-      <div><textarea ref={newPostElement}></textarea></div>
+      <div><textarea ref={newPostElement} onChange={onPostChange} value={props.postsPage.newPostText}></textarea></div>
       <div>
         <button onClick={newPost}>Add post</button>
       </div>
