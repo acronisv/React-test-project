@@ -8,13 +8,14 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Posts from './components/Posts/Posts';
 
 const App = (props) => {
+  //console.log(props)
   return (
     <div className="wrap">
       <BrowserRouter>
         <Header />
         <Aside state={props.state.sideBar}/>
         <main className="main-content">
-          <Route path='/posts' render={() => <Posts postsPage={props.state.postsPage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>} />
+          <Route path='/posts' render={() => <Posts state={props.state} addPost={props}/>} />
           <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />} />
         </main>
       </BrowserRouter>
