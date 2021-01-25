@@ -16,7 +16,7 @@ const App = (props) => {
         <Aside state={props.state.sideBar}/>
         <main className="main-content">
           <Route path='/posts' render={() => <Posts state={props.state} dispatch={props.dispatch}/>} />
-          <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />} />
+          <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} dispatch={props.dispatch}/>} />
         </main>
       </BrowserRouter>
     </div>

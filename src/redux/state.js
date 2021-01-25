@@ -1,45 +1,7 @@
-// let renderEntireTree = () => {
-//     console.log('state changed')
-// }
-
-// let state = {
-//     dialogsPage: {
-//         messagesData: [
-//             { id: 1, message: 'text1' },
-//             { id: 2, message: 'text2' },
-//             { id: 3, message: 'text3' },
-//             { id: 4, message: 'text4' }
-//         ],
-//         dialogsData: [
-//             { id: 1, name: 'person1' },
-//             { id: 2, name: 'person2' },
-//             { id: 3, name: 'person3' },
-//             { id: 4, name: 'person4' }
-//         ]
-//     },
-//     postsPage: {
-//         postsData: [
-//             { id: 1, title: 'Компонент', text: 'Функция возвращающая разметку JSX с параметрами props', likesCount: 12 },
-//             { id: 2, title: 'title2', text: 'text2', likesCount: 7 },
-//             { id: 3, title: 'title3', text: 'text3', likesCount: 5 }
-//         ],
-//         newPostText: 'default text'
-//     },
-//     sideBar: {
-//         mainMenu: [
-//             { id: 1, name: 'Profile', link: 'profile' },
-//             { id: 2, name: 'Messages', link: 'dialogs' },
-//             { id: 3, name: 'Posts', link: 'posts' },
-//             { id: 4, name: 'News', link: 'news' },
-//         ],
-//         friendList: [
-//             { id: 1, name: 'John' },
-//             { id: 2, name: 'Pete' },
-//             { id: 3, name: 'Jason' },
-//             { id: 4, name: 'Mark' },
-//         ]
-//     }
-// }
+const ADD_POST = 'ADD-POST'
+const UPDATE_POST = 'UPDATE-NEW-POST-TEXT'
+const SEND_MSG = 'SEND-MESSAGE'
+const UPDATE_MSG = 'UPDATE_MSG_TEXT'
 
 let store = {
     _state: {
@@ -50,6 +12,7 @@ let store = {
                 { id: 3, message: 'text3' },
                 { id: 4, message: 'text4' }
             ],
+            newMessageText: 'default text',
             dialogsData: [
                 { id: 1, name: 'person1' },
                 { id: 2, name: 'person2' },
@@ -62,7 +25,8 @@ let store = {
                 { id: 1, title: 'Компонент', text: 'Функция возвращающая разметку JSX с параметрами props', likesCount: 12 },
                 { id: 2, title: 'Инкапсуляция', text: 'Невозможность прямого доступа к данным, скрытие каких либо реализаций. Скрытие в плане возможности использования каких-либо действий, не заморачиваясь над тем, как они реализованы', likesCount: 7 },
                 { id: 3, title: 'Наследование', text: 'Сущность может наследовать данные и функциональность некоторого существующего типа, способствуя повторному использованию компонентов', likesCount: 5 },
-                { id: 3, title: 'Полиморфизм', text: 'Возможность менять методы, свойства, соблюдая при этом интерфейс взаимодействия так, что эти св-ва и методы могут содержать разные данные и действия', likesCount: 5 }
+                { id: 4, title: 'Полиморфизм', text: 'Возможность менять методы, свойства, соблюдая при этом интерфейс взаимодействия так, что эти св-ва и методы могут содержать разные данные и действия', likesCount: 5 },
+                { id: 5, title: 'Action', text: 'Объект со свойством type', likesCount: 5 }
             ],
             newPostText: 'default text'
         },
@@ -91,7 +55,7 @@ let store = {
         this._callSubscriber = observer
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost = {
                 id: 5,
                 title: 'New title',
@@ -101,13 +65,49 @@ let store = {
             this._state.postsPage.postsData.push(newPost)
             this._state.postsPage.newPostText = ''
             this._callSubscriber(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_POST) {
             this._state.postsPage.newPostText = action.newText
+            this._callSubscriber(this._state)
+        } else if (action.type === SEND_MSG) {
+            let newMsg = {
+                id: 5,
+                message: this._state.dialogsPage.newMessageText
+            }
+            this._state.dialogsPage.messagesData.push(newMsg)
+            this._state.dialogsPage.newMessageText=''
+            this._callSubscriber(this._state)
+        } else if (action.type === UPDATE_MSG) {
+            this._state.dialogsPage.newMessageText = action.text
             this._callSubscriber(this._state)
         }
     }
 }
 
+export const sendMessageActionCreator = () => {
+    return {
+        type: SEND_MSG
+    }
+}
+
+export const updateMessageActionCreator = (text) => {
+    return {
+        type: UPDATE_MSG,
+        text: text
+    }
+}
+
+export const addPostActionCreator = () => {
+    return {
+      type: ADD_POST
+    }
+  }
+  
+export const updateNewPostActionCreator = (text) => {
+    return {
+      type: UPDATE_POST,
+      newText: text
+    }
+  }
 
 // export let addPost = () => {
 //     let newPost = {
