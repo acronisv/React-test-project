@@ -2,17 +2,19 @@ import React from 'react';
 import Post from './Post/Post';
 
 const Posts = (props) => {
-
+  console.log(props)
   let newPostElement = React.createRef()
 
   let newPost = () => {
-    //let text = newPostElement.current.value
-    props.addPost.addPost()
+    //props.addPost.addPost()
+    props.dispatch({type:'ADD-POST'})
   }
 
   let onPostChange =() => {
     let text = newPostElement.current.value
-    props.addPost.updateNewPostText(text)
+    //props.addPost.updateNewPostText(text)
+    props.dispatch({type:'UPDATE-NEW-POST-TEXT', newText: text})
+    //debugger
     console.log(props.state.postsPage.newPostText)
   }
 

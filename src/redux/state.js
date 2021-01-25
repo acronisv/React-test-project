@@ -87,23 +87,24 @@ let store = {
     _callSubscriber() {
         console.log('No subscribers')
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            title: 'New title',
-            text: this._state.postsPage.newPostText,
-            likesCount: 5
-        }
-        this._state.postsPage.postsData.push(newPost)
-        this._state.postsPage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(newText) {
-        this._state.postsPage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
     subscribe(observer) {
         this._callSubscriber = observer
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 5,
+                title: 'New title',
+                text: this._state.postsPage.newPostText,
+                likesCount: 5
+            }
+            this._state.postsPage.postsData.push(newPost)
+            this._state.postsPage.newPostText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.postsPage.newPostText = action.newText
+            this._callSubscriber(this._state)
+        }
     }
 }
 
