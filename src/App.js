@@ -9,6 +9,7 @@ import Posts from './components/Posts/Posts';
 
 const App = (props) => {
   //console.log(props)
+
   return (
     <div className="wrap">
       <BrowserRouter>

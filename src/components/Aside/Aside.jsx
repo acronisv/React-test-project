@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Friends from './Friends/Friends';
 
 const Aside = (props) => {
+
 let menuItems = props.state.mainMenu.map(menuItem => <li><NavLink to={`/${menuItem.link}`} activeClassName={asideStyle.active}>{menuItem.name}</NavLink ></li>)
   return (
     <aside className={asideStyle.side_bar}>
