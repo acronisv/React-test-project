@@ -4,8 +4,8 @@ import { Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
-import Dialogs from './components/Dialogs/Dialogs';
-import Posts from './components/Posts/Posts';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
+import PostsContainer from './components/Posts/PostsContainer';
 
 const App = (props) => {
   //console.log(props)
@@ -16,8 +16,8 @@ const App = (props) => {
         <Header />
         <Aside state={props.state.sideBar}/>
         <main className="main-content">
-          <Route path='/posts' render={() => <Posts state={props.state} dispatch={props.dispatch}/>} />
-          <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} dispatch={props.dispatch}/>} />
+          <Route path='/posts' render={() => <PostsContainer store={props.store}/>} />
+          <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>} />
         </main>
       </BrowserRouter>
     </div>

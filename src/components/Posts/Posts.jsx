@@ -1,31 +1,26 @@
 import React from 'react';
-import { addPostActionCreator, updateNewPostActionCreator } from '../../redux/posts-reducer';
 import Post from './Post/Post';
 
 
 const Posts = (props) => {
   let newPostElement = React.createRef()
-
-  let newPost = () => {
-    //props.addPost.addPost()
-    props.dispatch(addPostActionCreator())
+  let onAddPost = () => {
+    props.addPost()
   }
 
   let onPostChange = () => {
     let text = newPostElement.current.value
-    //props.addPost.updateNewPostText(text)
-    props.dispatch(updateNewPostActionCreator(text))
-    //debugger
-    console.log(props.state.postsPage.newPostText)
+    props.updateNewPostText(text)
+
   }
 
-  let postsElements = props.state.postsPage.postsData.map(post => <Post title={post.title} text={post.text} likes={post.likesCount} />)
+  let postsElements = props.posts.map(post => <Post title={post.title} text={post.text} likes={post.likesCount} />)
   return (
     <div>
       <h3>Posts</h3>
-      <div><textarea ref={newPostElement} onChange={onPostChange} value={props.state.postsPage.newPostText}></textarea></div>
+      <div><textarea ref={newPostElement} onChange={onPostChange} value={props.newPostText}></textarea></div>
       <div>
-        <button onClick={newPost}>Add post</button>
+        <button onClick={onAddPost}>Add post</button>
       </div>
       {postsElements}
     </div>
