@@ -20,13 +20,16 @@ const postsReducer = (state = initialState, action) => {
                 title: 'New title',
                 text: state.newPostText,
                 likesCount: 5
+            }            
+            return {...state,
+                postsData: [...state.postsData, newPost],
+                newPostText: '',
             }
-            state.postsData.push(newPost)
-            state.newPostText = ''
-            return state
-        case UPDATE_POST:
-            state.newPostText = action.newText
-            return state
+        case UPDATE_POST:{
+            return {...state,
+                newPostText: action.newText
+            }
+        }
         default:
             return state
     }

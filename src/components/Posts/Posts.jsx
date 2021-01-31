@@ -15,7 +15,7 @@ const Posts = (props) => {
 
   }
 
-  let postsElements = props.posts.map(post => <Post title={post.title} text={post.text} likes={post.likesCount} />)
+  let postsElements = props.posts.map(post => <Post title={post.title} key={post.id} text={post.text} likes={post.likesCount} />)
   return (
     <div>
       <h3>Posts</h3>

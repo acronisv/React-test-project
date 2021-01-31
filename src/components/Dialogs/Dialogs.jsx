@@ -15,8 +15,8 @@ const Dialogs = (props) => {
        props.updateMessageText(text)
     }
 
-    let dialogElements = props.dialogsPage.dialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id} />)
-    let messageElements = props.dialogsPage.messagesData.map(message => <Message message={message.message} />)
+    let dialogElements = props.dialogsPage.dialogsData.map(dialog => <Dialog name={dialog.name} key={dialog.id} id={dialog.id} />)
+    let messageElements = props.dialogsPage.messagesData.map(message => <Message message={message.message} key={message.id} />)
     return (
         <div className={s.dialogs}>
             <div className={s.dialogs__list}>
