@@ -1,5 +1,5 @@
 const Friends = (props) => {
-    let friendList = props.state.friendList.map(friend => <div>{friend.name}</div>)
+    let friendList = props.friendList.map(friend => <div>{friend.name}</div>)
     return (
         <div>
             {friendList}

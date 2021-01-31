@@ -1,17 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Aside from './Aside';
-import StoreContext from '../../StoreContext';
 
-const AsideContainer = () => {
-
-return (
-    <StoreContext.Consumer>
-      {(store) => (
-        <Aside state={store.getState().sideBar}/>
-      )}
-      
-    </StoreContext.Consumer>
-  )
+let mapPropsToState = (state) => {
+  return {
+    mainMenu: state.sideBar.mainMenu,
+    friendList: state.sideBar.friendList
+  }
 }
+
+const AsideContainer = connect(mapPropsToState)(Aside)
 
 export default AsideContainer

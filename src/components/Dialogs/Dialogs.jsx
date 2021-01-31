@@ -4,6 +4,7 @@ import Message from './Message/Message'
 import Dialog from './Dialog/Dialog'
 
 const Dialogs = (props) => {
+
     let newMessage = React.createRef();
     let onSendMessage = () => {
         props.sendMessage()
@@ -14,8 +15,8 @@ const Dialogs = (props) => {
        props.updateMessageText(text)
     }
 
-    let dialogElements = props.dialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} />)
-    let messageElements = props.messages.map(message => <Message message={message.message} />)
+    let dialogElements = props.dialogsPage.dialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id} />)
+    let messageElements = props.dialogsPage.messagesData.map(message => <Message message={message.message} />)
     return (
         <div className={s.dialogs}>
             <div className={s.dialogs__list}>
