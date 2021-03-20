@@ -3,7 +3,7 @@ import Post from './Post/Post';
 
 
 const Posts = (props) => {
-
+  console.log(props)
   let newPostElement = React.createRef()
   let onAddPost = () => {
     props.addPost()

@@ -9,8 +9,8 @@ import { Provider } from 'react-redux';
 
 
 let renderEntireTree = (state) => {
-  // console.log(store)
-  // console.log(state)
+   console.log(store)
+   console.log(state)
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
