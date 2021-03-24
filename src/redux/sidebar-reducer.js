@@ -4,6 +4,7 @@ let initialState = {
         { id: 2, name: 'Messages', link: 'dialogs' },
         { id: 3, name: 'Posts', link: 'posts' },
         { id: 4, name: 'News', link: 'news' },
+        { id: 5, name: 'Users', link: 'users' },
     ],
     friendList: [
         { id: 1, name: 'John' },
