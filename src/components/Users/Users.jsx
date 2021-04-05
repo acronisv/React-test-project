@@ -3,7 +3,6 @@ import noImg from './../../assets/no-image.png'
 import usersStyle from './Users.module.css'
 
 let Users = (props) => {
-    console.log(props.totalUsersCount)
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
         let pages = []
 
