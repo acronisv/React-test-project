@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import noImg from './../../assets/no-image.png'
 import usersStyle from './Users.module.css'
 
@@ -38,7 +39,9 @@ let Users = (props) => {
                     </span>
                     <span>
                         <div>
-                            <img src={user.photos.small !=null ?user.photos.small :noImg} alt="small-img"/>
+                            <NavLink to={'/profile/'+user.id}>
+                                <img src={user.photos.small !=null ?user.photos.small :noImg} alt="small-img"/>
+                            </NavLink>
                         </div>
                     </span>
                     <span>
