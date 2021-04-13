@@ -1,7 +1,8 @@
 .header {
     grid-area: head;
     background-color: rgba(248, 177, 149, 0.5);
-    
+    display: flex;
+    justify-content: space-between;
   }
   
   .header__logo {
