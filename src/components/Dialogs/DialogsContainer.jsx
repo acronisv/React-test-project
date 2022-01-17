@@ -3,6 +3,7 @@ import { sendMessageActionCreator, updateMessageActionCreator } from '../../redu
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 
 let mapStateToProps = (state) => {
@@ -22,6 +23,16 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(Dialogs)
+// Было
+// let AuthRedirectComponent = withAuthRedirect(Dialogs)
+// export default connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+
+//Стало с compose
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs)
+
+
