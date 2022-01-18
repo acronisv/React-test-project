@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import noImg from './../../assets/no-image.png'
 import usersStyle from './Users.module.css'
 import * as axios from 'axios'
-import { UsersApi } from '../../api/api'
+import { usersAPI } from '../../api/api'
 
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
