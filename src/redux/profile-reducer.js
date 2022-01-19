@@ -36,8 +36,8 @@ export const setStatus = (status) => {
 export const getStatus = (userId) => {
     return (
         (dispatch) => {
-            profileAPI.getStatus(userId).then(data=>{
-                dispatch(setStatus(data))
+            profileAPI.getStatus(userId).then(response=>{
+                dispatch(setStatus(response.data))
             })
         }
     )
@@ -46,10 +46,9 @@ export const getStatus = (userId) => {
 export const updateStatus = (userId) => {
     return (
         (dispatch) => {
-            profileAPI.updateStatus(userId).then(data=>{
-                if (data.resultCode === 0) {
-                    console.log(data.resultCode)
-                    dispatch(setStatus(data))
+            profileAPI.updateStatus(userId).then(response=>{
+                if (response.resultCode === 0) {
+                    dispatch(setStatus(response.data))
                 }
             })
         }
@@ -59,8 +58,8 @@ export const updateStatus = (userId) => {
 export const getUserProfile = (userId) => {
     return (
         (dispatch) => {
-            profileAPI.getProfile(userId).then(data=>{
-                dispatch(setUserProfile(data))
+            profileAPI.getProfile(userId).then(response=>{
+                dispatch(setUserProfile(response.data))
             })
         }
     )
