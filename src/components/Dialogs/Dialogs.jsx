@@ -3,17 +3,13 @@ import s from './Dialogs.module.css'
 import Message from './Message/Message'
 import Dialog from './Dialog/Dialog'
 import { Redirect } from 'react-router-dom';
+import MessageReduxForm from './MessageForm';
 
 const Dialogs = (props) => {
-
-    let newMessage = React.createRef();
-    let onSendMessage = () => {
-        props.sendMessage()
-    }
-
-    let onUpdateMessageText = () => {
-       let text = newMessage.current.value
-       props.updateMessageText(text)
+    
+    let addNewMessage = (values) => {
+        props.sendMessage(values.newMessageBody)
+        
     }
 
     if (!props.isAuth) return <Redirect to={"/login"}/>
@@ -28,10 +24,7 @@ const Dialogs = (props) => {
             <div className={s.message__list}>
                 {messageElements}
             </div>
-            <div>
-                <textarea ref={newMessage} name="" id="" cols="30" rows="10" onChange={onUpdateMessageText} value={props.newMessageText}></textarea>
-                <button onClick={onSendMessage} >Send message</button>
-            </div>
+            <MessageReduxForm onSubmit={addNewMessage}/>
         </div>
     )
 }
