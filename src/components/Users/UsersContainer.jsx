@@ -2,7 +2,7 @@ import React from 'react'
 import Users from './Users'
 import { connect } from 'react-redux'
 import { follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers} from '../../redux/users-reducer'
-import { getUsersList, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingInProgress} from '../../redux/users-selectors'
+import { getUsersList, getUsersSelector, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingInProgress} from '../../redux/users-selectors'
 import Preloader from '../common/preloader/preloader'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 import { compose } from 'redux'
@@ -16,6 +16,8 @@ class UsersContainer extends React.Component {
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
     render() {
+        // uncomment to test reselect #83
+        //console.log('Users page render')
         return <>
             {this.props.isFetching ? <Preloader /> : null}
                 <Users totalUsersCount = {this.props.totalUsersCount}
@@ -43,8 +45,11 @@ class UsersContainer extends React.Component {
 // }
 
 let mapStateToProps = (state) => {
+    console.log("mapStateToProps")
     return {
-        users: getUsersList(state),
+        // uncomment to test reselect #83
+        //users: getUsersList(state),
+        users: getUsersSelector(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
