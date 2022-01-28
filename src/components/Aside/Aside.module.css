@@ -1,8 +1,15 @@
 .side_bar {
   grid-area: side;
-  background-color: rgba(242, 115, 127, 0.5);
+  background-color: #4f5a6e;
+  padding: 10px 20px
 }
 
-a.active {
-  color: white
+.main_menu__list{
+  margin: 0;
+  padding: 10px 0;
+  list-style-type: none;
+}
+
+.link_active {
+  color: #ffffff;
 }
