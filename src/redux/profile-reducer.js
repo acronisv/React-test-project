@@ -43,12 +43,12 @@ export const getStatus = (userId) => {
     )
 }
 
-export const updateStatus = (userId) => {
+export const updateStatus = (status) => {
     return (
         (dispatch) => {
-            profileAPI.updateStatus(userId).then(response=>{
-                if (response.resultCode === 0) {
-                    dispatch(setStatus(response.data))
+            profileAPI.updateStatus(status).then(response=>{
+                if (response.data.resultCode === 0) {
+                    dispatch(setStatus(status))
                 }
             })
         }
