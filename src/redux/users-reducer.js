@@ -8,7 +8,6 @@ const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
-
 let initialState = {
     usersList: [
         // { id: 1, name: 'John S.', status:'I am a bitch', followed: true, location:{country: 'Westeros', city: 'Winterfell'} },
@@ -20,11 +19,16 @@ let initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: []
+    followingInProgress: [],
+    fake: 1
 }
 
 const usersReducer = (state = initialState, action) => {
     switch(action.type){
+        // uncomment to test reselect #83
+        // case "FAKE": {
+        //     return {...state, fake: state.fake + 1}
+        // }
         case FOLLOW:
             return {...state,
                 usersList: state.usersList.map(user => {
@@ -127,7 +131,7 @@ export const follow = (userId) => {
         dispatch(toggleFollowingProgress(true, userId))
         usersAPI.follow(userId)
         .then(response => {
-            if (response.resultCode == 0) {
+            if (response.data.resultCode == 0) {
                 dispatch(followSuccess(userId)) 
             }
             dispatch(toggleFollowingProgress(false, userId))
@@ -140,7 +144,7 @@ export const unfollow = (userId) => {
         dispatch(toggleFollowingProgress(true, userId))
         usersAPI.unfollow(userId)
         .then(response => {
-            if (response.resultCode == 0) {
+            if (response.data.resultCode == 0) {
                 dispatch(unfollowSuccess(userId)) 
             }
             dispatch(toggleFollowingProgress(false, userId))

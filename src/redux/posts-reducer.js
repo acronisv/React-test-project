@@ -1,5 +1,4 @@
 const ADD_POST = 'ADD-POST'
-const UPDATE_POST = 'UPDATE-NEW-POST-TEXT'
 
 let initialState = {
     postsData: [
@@ -10,7 +9,6 @@ let initialState = {
         { id: 5, title: 'Action', text: 'Объект со свойством type', likesCount: 5 },
         { id: 6, title: 'Reducer', text: 'Чистая функция, которая принимает state и action, если нужно модифицирует state по правилам иммутабельности (работая с копией) и возвращает копию, либо нетронутый state, если его не надо было изменять', likesCount: 5 }
     ],
-    newPostText: 'default text'
 }
 const postsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -18,33 +16,21 @@ const postsReducer = (state = initialState, action) => {
             let newPost = {
                 id: 5,
                 title: 'New title',
-                text: state.newPostText,
+                text: action.postText,
                 likesCount: 5
             }            
             return {...state,
                 postsData: [...state.postsData, newPost],
-                newPostText: '',
             }
-        case UPDATE_POST:{
-            return {...state,
-                newPostText: action.newText
-            }
-        }
         default:
             return state
     }
 }
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (postText) => {
     return {
-        type: ADD_POST
-    }
-}
-
-export const updateNewPostActionCreator = (text) => {
-    return {
-        type: UPDATE_POST,
-        newText: text
+        type: ADD_POST,
+        postText
     }
 }
 
