@@ -4,7 +4,7 @@ import PostReduxForm from './PostForm';
 
 
 const Posts = (props) => {
-
+  console.log("posts render")
   let onAddPost = (values) => {
     props.addPost(values.postText)
   }

@@ -1,7 +1,7 @@
-const ADD_POST = 'ADD-POST'
-const DELETE_POST = 'DELETE-POST'
+import postsReducer, { deletePost } from './posts-reducer';
+import { addPostActionCreator } from "./posts-reducer";
 
-let initialState = {
+let state = {
     postsData: [
         { id: 1, title: 'Компонент', text: 'Функция возвращающая разметку JSX с параметрами props', likesCount: 12 },
         { id: 2, title: 'Инкапсуляция', text: 'Невозможность прямого доступа к данным, скрытие каких либо реализаций. Скрытие в плане возможности использования каких-либо действий, не заморачиваясь над тем, как они реализованы', likesCount: 7 },
@@ -11,39 +11,36 @@ let initialState = {
         { id: 6, title: 'Reducer', text: 'Чистая функция, которая принимает state и action, если нужно модифицирует state по правилам иммутабельности (работая с копией) и возвращает копию, либо нетронутый state, если его не надо было изменять', likesCount: 5 }
     ],
 }
-const postsReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case ADD_POST:
-            let newPost = {
-                id: 5,
-                title: 'New title',
-                text: action.postText,
-                likesCount: 5
-            }            
-            return {...state,
-                postsData: [...state.postsData, newPost],
-            }
-        case DELETE_POST:
-            return {...state,
-                postsData: state.postsData.filter((el)=>el.id != action.postId)
-            }
-        default:
-            return state
-    }
-}
 
-export const addPostActionCreator = (postText) => {
-    return {
-        type: ADD_POST,
-        postText
-    }
-}
+test('Add new post test', () => {
+    // 1. Initial data
+    let action = addPostActionCreator('New post text')
 
-export const deletePost = (postId) => {
-    return {
-        type: DELETE_POST,
-        postId
-    }
-}
+    // 2. Action
+    let newState = postsReducer(state, action)
 
-export default postsReducer
+    //3. Expectation
+    expect(newState.postsData.length).toBe(7)
+});
+
+test('New post text should be "New post text"', () => {
+    // 1. Initial data
+    let action = addPostActionCreator('New post text')
+    
+    // 2. Action
+    let newState = postsReducer(state, action)
+
+    //3. Expectation
+    expect(newState.postsData[6].text).toBe('New post text')
+});
+
+test('The length of array should decrease after deleting', () => {
+    // 1. Initial data
+    let action = deletePost(2)
+    
+    // 2. Action
+    let newState = postsReducer(state, action)
+
+    //3. Expectation
+    expect(newState.postsData.length).toBe(5)
+});

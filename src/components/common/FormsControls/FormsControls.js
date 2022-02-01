@@ -3,7 +3,7 @@ import styles from './FormsControls.module.css'
 export const FormControl = ({input, meta, ...props}) => {
     const hasError = meta.touched && meta.error
     const Tag = props.fieldType
-    console.log(props)
+    //console.log(props)
     return (
         <div className={styles.formControl + " " + (hasError ? styles.error : "")}>
             {Tag ? <Tag {...input} {...props} /> 
