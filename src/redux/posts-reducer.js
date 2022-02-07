@@ -1,5 +1,5 @@
-const ADD_POST = 'ADD-POST'
-const DELETE_POST = 'DELETE-POST'
+const ADD_POST = 'posts-reducer/ADD-POST'
+const DELETE_POST = 'posts-reducer/DELETE-POST'
 
 let initialState = {
     postsData: [
@@ -11,6 +11,7 @@ let initialState = {
         { id: 6, title: 'Reducer', text: 'Чистая функция, которая принимает state и action, если нужно модифицирует state по правилам иммутабельности (работая с копией) и возвращает копию, либо нетронутый state, если его не надо было изменять', likesCount: 5 }
     ],
 }
+
 const postsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
@@ -32,18 +33,14 @@ const postsReducer = (state = initialState, action) => {
     }
 }
 
-export const addPostActionCreator = (postText) => {
-    return {
+export const addPostActionCreator = (postText) => ({
         type: ADD_POST,
         postText
-    }
-}
+})
 
-export const deletePost = (postId) => {
-    return {
+export const deletePost = (postId) => ({
         type: DELETE_POST,
         postId
-    }
-}
+})
 
 export default postsReducer

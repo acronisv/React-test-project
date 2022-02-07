@@ -1,8 +1,7 @@
-import { profileAPI, usersAPI } from './../api/api'
+import { profileAPI } from './../api/api'
 
-const SET_USER_PROFILE = 'SET-USER-PROFILE'
-const SET_STATUS = 'SET-STATUS'
-
+const SET_USER_PROFILE = 'profile-reducer/SET-USER-PROFILE'
+const SET_STATUS = 'profile-reducer/SET-STATUS'
 
 let initialState = {
     profile: null,
@@ -22,47 +21,30 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const setUserProfile = (profile) => {
-    return{type: SET_USER_PROFILE, profile}
-}
+export const setUserProfile = (profile) => ({
+    type: SET_USER_PROFILE, profile
+})
 
-export const setStatus = (status) => {
-    return {
+export const setStatus = (status) => ({
         type: SET_STATUS,
         status
+})
+
+export const getStatus = (userId) => async (dispatch) => {
+    let response = await profileAPI.getStatus(userId)
+    dispatch(setStatus(response.data))
+}
+    
+export const updateStatus = (status) => async (dispatch) => {
+    let response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status))
     }
 }
 
-export const getStatus = (userId) => {
-    return (
-        (dispatch) => {
-            profileAPI.getStatus(userId).then(response=>{
-                dispatch(setStatus(response.data))
-            })
-        }
-    )
-}
-
-export const updateStatus = (status) => {
-    return (
-        (dispatch) => {
-            profileAPI.updateStatus(status).then(response=>{
-                if (response.data.resultCode === 0) {
-                    dispatch(setStatus(status))
-                }
-            })
-        }
-    )
-}
-
-export const getUserProfile = (userId) => {
-    return (
-        (dispatch) => {
-            profileAPI.getProfile(userId).then(response=>{
-                dispatch(setUserProfile(response.data))
-            })
-        }
-    )
+export const getUserProfile = (userId) => async (dispatch) => {
+    let response = await profileAPI.getProfile(userId)
+    dispatch(setUserProfile(response.data))
 }
 
 export default profileReducer
