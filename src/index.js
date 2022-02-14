@@ -7,6 +7,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/redux-store'
 import { Provider } from 'react-redux';
+import ReactApp from './App';
 
 // uncomment to test reselect #83
 // setInterval(()=>{
@@ -15,11 +16,7 @@ import { Provider } from 'react-redux';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <ReactApp />
   </React.StrictMode>,
   document.getElementById('root')
 );
